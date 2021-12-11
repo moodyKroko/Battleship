@@ -29,12 +29,7 @@ public class App implements Runnable {
     try {
       UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-      GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(getClass().getResource("fonts/Perfect Dark BRK.ttf").getFile())));
-//             ge.registerFont(Font.createFont(Font.TYPE0_FONT, new File("resources/fonts/Imperial one.otf")));
-    } catch (FontFormatException e) {
-      System.out.println("Font not found");
-    } catch (Exception ignore) {
+    } catch (Exception e) {
     }
 
     // base that creates a desktop window
