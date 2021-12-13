@@ -1,3 +1,4 @@
+import java.util.Objects;
 
 /**
  * Ship class for game Battleship Assignment 3 1701
@@ -117,5 +118,22 @@ public class Ship {
     public String toString() {
         return "Ships >> Lives: " + length +
             ", Name: " + name + "\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Ship ship = (Ship) o;
+        return length == ship.length && name.equals(ship.name) && Objects.equals(symbol, ship.symbol);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, symbol, length);
     }
 }

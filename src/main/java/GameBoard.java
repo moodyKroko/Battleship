@@ -39,7 +39,7 @@ public class GameBoard extends JPanel implements ActionListener {
   private final String water = "W";
   private final String kraken = "K";
   private final String cetus = "C";
-    ArrayList<Ship> shipsList = new ArrayList<>();
+  ArrayList<Ship> shipsList = new ArrayList<>();
   JTextField statusPanel;
   JTextField updatesPanel;
   JTextArea shipAlive;
@@ -59,8 +59,8 @@ public class GameBoard extends JPanel implements ActionListener {
     // randomly insert ships to the game board
     placeShips();
     // randomly insert monsters to the game board
-      int monsterCount = 2;
-      placeMonsters(monsterCount);
+    int monsterCount = 2;
+    locationForMonster(monsterCount);
 
     statusPanels();    // sets the status / updates
     setOpaque(false);
@@ -150,11 +150,9 @@ public class GameBoard extends JPanel implements ActionListener {
   //////////////////////////
   private void placeShips() {
     for (int i = 0; i < 5; i++) {
-      // boolean isSunk = shipsList.get(i).isSunk();
       if (!(shipsList.get(i).isSunk() || shipsList.get(i).isHit())) { // contains bug
-        // delete the expression after ||
-        int shipLength = shipsList.get(i).getLength();     // get ships lengths
-        String shipSymbol = shipsList.get(i).getSymbol();  // get ship symbol
+        int shipLength = shipsList.get(i).getLength();
+        String shipSymbol = shipsList.get(i).getSymbol();
 
         boolean vertical = new Random().nextBoolean();  // random alignment
         int col = new Random().nextInt(10);
@@ -180,15 +178,12 @@ public class GameBoard extends JPanel implements ActionListener {
   }
 
   private void setShip(int row, int col, int length, String symbol, boolean vertical) {
-//    String[][] location = new String[BOARD_SIZE][BOARD_SIZE];
     for (int i = 0; i < length; i++) {
       if (vertical) {
         getCell(row, col).setActionCommand(symbol);
-//        location[row][col] = symbol;
         row++;
       } else {
         getCell(row, col).setActionCommand(symbol);
-//        location[row][col] = symbol;
         col++;
       }
     }
@@ -221,16 +216,16 @@ public class GameBoard extends JPanel implements ActionListener {
   private boolean checkField(int row, int col, int shipLength, boolean vertical) {
     if (row < BOARD_SIZE && col < BOARD_SIZE) {
       if (vertical) {
-          return (row + shipLength - 1) < BOARD_SIZE;
+        return (row + shipLength - 1) < BOARD_SIZE;
       } else {
-          return (col + shipLength - 1) < BOARD_SIZE;
+        return (col + shipLength - 1) < BOARD_SIZE;
       }
     }
     return false;
   }
 
   //////////////////////////////
-  private void placeMonsters(int count) {
+  private void locationForMonster(int count) {
     for (int seaMonster = 0; seaMonster < count; seaMonster++) {
       int row = new Random().nextInt(10);
       int col = new Random().nextInt(10);
@@ -290,7 +285,7 @@ public class GameBoard extends JPanel implements ActionListener {
   }
 
   /////////////////////////////
-  private void cetusFuntion() {
+  private void cetusFunction() {
     statusPanel.setText("");
     shipDestroyed.setText("");
 
@@ -299,7 +294,7 @@ public class GameBoard extends JPanel implements ActionListener {
     repaint();
     buildBoard();
     placeShips();
-    placeMonsters(1); // < just places kraken
+    locationForMonster(1); // < just places kraken
   }
 
   /////////////////////////////////
@@ -322,7 +317,7 @@ public class GameBoard extends JPanel implements ActionListener {
       case cetus:
         buttonFormat(button);
         shootShip(row, col, cetusIconName);
-        cetusFuntion();
+        cetusFunction();
         break;
 
       case "P":
@@ -336,10 +331,13 @@ public class GameBoard extends JPanel implements ActionListener {
         for (Ship ships : shipsList) {
           if (ships.getSymbol().equals(command)) {
             ships.hit();
-            if (ships.sunken()) {
-              updatesPanel.setText(ships.sunkenReport());
-              shipDestroyed.setText(shipDestroyed.getText() + ships.sunkenReport());
-            }
+          }
+        }
+
+        for (Ship ships : shipsList) {
+          if (ships.sunken()) {
+            updatesPanel.setText(ships.sunkenReport());
+            shipDestroyed.setText(shipDestroyed.getText() + ships.sunkenReport());
           }
           statusPanel.setText(ships.getStatus());
         }

@@ -46,7 +46,7 @@ public class MainMenu extends JPanel {
     setMaximumSize(new Dimension(1600, 900));
 
     loadImage();
-    createFont();
+    installFonts();
 
     GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
     Font[] allFonts = ge.getAllFonts();
@@ -93,12 +93,11 @@ public class MainMenu extends JPanel {
     }
   }
 
-  public void createFont() {
+  public void installFonts() {
     String[] fontList = {"Perfect Dark BRK.ttf", "Imperial One.ttf"};
 
     for (String fontName : fontList) {
       File file = new File("target/classes/fonts/" + fontName).getAbsoluteFile();
-      System.out.println(file);
 
       GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
       try {
@@ -107,7 +106,6 @@ public class MainMenu extends JPanel {
       }
     }
   }
-
 
   @Override
   public void paintComponent(Graphics g) {
