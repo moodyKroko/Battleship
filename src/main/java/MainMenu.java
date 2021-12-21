@@ -98,7 +98,6 @@ public class MainMenu extends JPanel {
 
     for (String fontName : fontList) {
       File file = new File("target/classes/fonts/" + fontName).getAbsoluteFile();
-      System.out.println(file);
 
       GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
       try {
