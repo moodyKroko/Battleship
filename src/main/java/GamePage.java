@@ -152,8 +152,8 @@ public class GamePage extends JPanel implements ActionListener {
 
       if (pauseOption == JOptionPane.NO_OPTION) {
         MainMenu mainMenu = new MainMenu();
-        board.shipsList.get(0).resetHitpoints();
-        board.shipsList.get(0).resetScore();
+//        board.shipsList.get(0).resetHitpoints();
+//        board.shipsList.get(0).resetScore();
 
         removeAll();
         add(mainMenu);

@@ -87,7 +87,7 @@ public class GameBoard extends JPanel implements ActionListener {
     for (Ship ships : shipsList) {
       shipAlive.setText(shipAlive.getText() + ships.toString());
     }
-    statusPanel.setText(shipsList.get(0).getStatus());
+//    statusPanel.setText(shipsList.get(0).getStatus());
   }
 
   ///////////////////////////
@@ -143,38 +143,38 @@ public class GameBoard extends JPanel implements ActionListener {
     int[] shipsLength = {2, 3, 3, 4, 5};
 
     for (int i = 0; i < shipsLength.length; i++) {
-      shipsList.add(new Ship(shipNames[i], shipsLength[i]));
+//      shipsList.add(new Ship(shipNames[i], shipsLength[i]));
     }
   }
 
   //////////////////////////
   private void placeShips() {
-    for (int i = 0; i < 5; i++) {
-      if (!(shipsList.get(i).isSunk() || shipsList.get(i).isHit())) { // contains bug
-        int shipLength = shipsList.get(i).getLength();
-        String shipSymbol = shipsList.get(i).getSymbol();
-
-        boolean vertical = new Random().nextBoolean();  // random alignment
-        int col = new Random().nextInt(10);
-        int row = new Random().nextInt(10);
-
-        // checks for outOfBound positions
-        if (!checkField(row, col, shipLength, vertical)) { // loop breaker
-          i--;
-          continue; // generates a new location
-        }
-
-        // checks the cell and around it
-        if (isOccupied(row, col, shipLength, vertical)) { // loop breaker
-          i--;
-          continue; // generates a new location
-        }
-
-        // this also saves the location of the ship for each ship
-        // places the ships after every test is passed
-        setShip(row, col, shipLength, shipSymbol, vertical);
-      }
-    }
+//    for (int i = 0; i < 5; i++) {
+//      if (!(shipsList.get(i).isSunk() || shipsList.get(i).isHit())) { // contains bug
+//        int shipLength = shipsList.get(i).getLength();
+//        String shipSymbol = shipsList.get(i).getSymbol();
+//
+//        boolean vertical = new Random().nextBoolean();  // random alignment
+//        int col = new Random().nextInt(10);
+//        int row = new Random().nextInt(10);
+//
+//        // checks for outOfBound positions
+//        if (!checkField(row, col, shipLength, vertical)) { // loop breaker
+//          i--;
+//          continue; // generates a new location
+//        }
+//
+//        // checks the cell and around it
+//        if (isOccupied(row, col, shipLength, vertical)) { // loop breaker
+//          i--;
+//          continue; // generates a new location
+//        }
+//
+//        // this also saves the location of the ship for each ship
+//        // places the ships after every test is passed
+//        setShip(row, col, shipLength, shipSymbol, vertical);
+//      }
+//    }
   }
 
   private void setShip(int row, int col, int length, String symbol, boolean vertical) {
@@ -303,15 +303,15 @@ public class GameBoard extends JPanel implements ActionListener {
       case water:
         buttonFormat(button);
         shootShip(row, col, missIconName);
-        shipsList.get(0).missed();
-        statusPanel.setText(shipsList.get(0).getStatus());
+//        shipsList.get(0).missed();
+//        statusPanel.setText(shipsList.get(0).getStatus());
         break;
 
       case kraken:
         buttonFormat(button);
         shootShip(row, col, krakenIconName);
-        shipsList.get(0).resetScore();
-        statusPanel.setText(shipsList.get(0).getStatus());
+//        shipsList.get(0).resetScore();
+//        statusPanel.setText(shipsList.get(0).getStatus());
         break;
 
       case cetus:
@@ -330,17 +330,17 @@ public class GameBoard extends JPanel implements ActionListener {
 
         for (Ship ships : shipsList) {
           if (ships.getSymbol().equals(command)) {
-            ships.hit();
+//            ships.hit();
           }
         }
 
-        for (Ship ships : shipsList) {
-          if (ships.sunken()) {
-            updatesPanel.setText(ships.sunkenReport());
-            shipDestroyed.setText(shipDestroyed.getText() + ships.sunkenReport());
-          }
-          statusPanel.setText(ships.getStatus());
-        }
+//        for (Ship ships : shipsList) {
+//          if (ships.sunken()) {
+//            updatesPanel.setText(ships.sunkenReport());
+//            shipDestroyed.setText(shipDestroyed.getText() + ships.sunkenReport());
+//          }
+//          statusPanel.setText(ships.getStatus());
+//        }
         break;
 
       default:
@@ -363,33 +363,33 @@ public class GameBoard extends JPanel implements ActionListener {
     updateStatus(row, col, button, command);
 
     // if hitpoints falls to 0 end ask if they want to restart or quit
-    if (shipsList.get(0).getHitPoints() == 0) {
-      int rematch = JOptionPane.showConfirmDialog(this, "Game Over, You want a Rematch ??", "Rematch",
-          JOptionPane.YES_NO_OPTION);
-      JPanel parent = (JPanel) getParent();
-
-      if (rematch == JOptionPane.YES_OPTION) {
-        statusPanel.setText("");
-        shipDestroyed.setText("");
-        shipsList.get(0).resetScore();
-        shipsList.get(0).resetHitpoints();
-
-        parent.removeAll();
-        parent.add(new GamePage());
-        parent.revalidate();
-        parent.repaint();
-
-      } else if (rematch == JOptionPane.NO_OPTION) {
-        // exit the game and back to main menu
-        shipsList.get(0).resetScore();
-        shipsList.get(0).resetHitpoints();
-
-        parent.removeAll();
-        parent.add(new MainMenu());
-        parent.revalidate();
-        parent.repaint();
-      }
-    }
+//    if (shipsList.get(0).getHitPoints() == 0) {
+//      int rematch = JOptionPane.showConfirmDialog(this, "Game Over, You want a Rematch ??", "Rematch",
+//          JOptionPane.YES_NO_OPTION);
+//      JPanel parent = (JPanel) getParent();
+//
+//      if (rematch == JOptionPane.YES_OPTION) {
+//        statusPanel.setText("");
+//        shipDestroyed.setText("");
+//        shipsList.get(0).resetScore();
+//        shipsList.get(0).resetHitpoints();
+//
+//        parent.removeAll();
+//        parent.add(new GamePage());
+//        parent.revalidate();
+//        parent.repaint();
+//
+//      } else if (rematch == JOptionPane.NO_OPTION) {
+//        // exit the game and back to main menu
+//        shipsList.get(0).resetScore();
+//        shipsList.get(0).resetHitpoints();
+//
+//        parent.removeAll();
+//        parent.add(new MainMenu());
+//        parent.revalidate();
+//        parent.repaint();
+//      }
+//    }
   }
 
   ///////////////////////////////////////////////////////
